@@ -104,7 +104,7 @@ def __init__(self, floor_plan_file, human_count, random_spawn, save_plots, N=10,
                 speed = random.randint(self.MIN_SPEED, self.MAX_SPEED)
 
          for i in range(self.num_agents):
-            a = Humant(i, self)
+            a = Human(i, self)
             self.schedule.add(a)
             # Add the agent to a random grid cell
             x = self.random.randrange(self.grid.width)
