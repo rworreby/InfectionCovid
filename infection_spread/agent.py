@@ -87,7 +87,7 @@ class Door(FloorObject):
     def __init__(self, pos, model):
         super().__init__(pos, traversable=True, model=model)
 
-class FireExit(FloorObject):
+class Exit(FloorObject):
     def __init__(self, pos, model):
         super().__init__(pos, traversable=True, model=model)
 

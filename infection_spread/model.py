@@ -15,9 +15,7 @@ from .agent import Human, Wall, Exit, Door
 class InfectionModel(Model):
     """A model for infection spread."""
 
-def __init__(self, N=10, width=10, height=10, ptrans=0.5, 
-                 progression_period=3, progression_sd=2, death_rate=0.0193, recovery_days=21,
-                 recovery_sd=7, floor_plan_file, human_count, random_spawn, save_plots):
+def __init__(self, N=10, width=10, height=10, ptrans=0.5, progression_period=3, progression_sd=2, death_rate=0.0193, recovery_days=21, recovery_sd=7, floor_plan_file, human_count, random_spawn, save_plots):
         # Load floorplan
         # floorplan = np.genfromtxt(path.join("infection_spread/floorplans/", floor_plan_file))
         with open(os.path.join("infection_spread/floorplans/", floor_plan_file), "rt") as f:
@@ -99,7 +97,7 @@ def __init__(self, N=10, width=10, height=10, ptrans=0.5,
 
 self.running = True
 
-  def step(self):
+def step(self):
         """
         Advance the model by one step.
         """
