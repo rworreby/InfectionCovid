@@ -1,20 +1,16 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[ ]:
-
-
 import time, enum
 import numpy as np
 import pandas as pd
 import pylab as plt
+import networkx as nx
+import sys
+import random
+from enum import Enum
+
 from mesa import Agent, Model
 from mesa.time import RandomActivation
 from mesa.space import MultiGrid
 from mesa.datacollection import DataCollector
-
-
-# In[ ]:
 
 
 class State(enum.IntEnum):
@@ -23,10 +19,7 @@ class State(enum.IntEnum):
     RECOVERED = 2
 
 
-# In[ ]:
-
-
-class MyAgent(Agent):
+class Human(Agent):
     """ An agent in an epidemic model."""
     def __init__(self, unique_id, model):
         super().__init__(unique_id, model)
@@ -77,3 +70,27 @@ class MyAgent(Agent):
         self.move()
         self.contact()
 
+"""
+ROOM SET UP
+"""
+
+class FloorObject(Agent):
+    def __init__(self, pos, traversable, model=None):
+        super().__init__(pos, model)
+        self.pos = pos
+        self.traversable = traversable
+
+    def get_position(self):
+        return self.pos
+
+class Door(FloorObject):
+    def __init__(self, pos, model):
+        super().__init__(pos, traversable=True, model=model)
+
+class FireExit(FloorObject):
+    def __init__(self, pos, model):
+        super().__init__(pos, traversable=True, model=model)
+
+class Wall(FloorObject):
+    def __init__(self, pos, model):
+        super().__init__(pos, traversable=False, model=model)
