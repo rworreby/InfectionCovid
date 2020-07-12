@@ -1,1 +1,1 @@
-# InfectionCovid
+# Infection Model - COVID-19
