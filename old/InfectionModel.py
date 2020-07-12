@@ -1,9 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[1]:
-
-
 class InfectionModel(Model):
     """A model for infection spread."""
     
@@ -46,10 +40,6 @@ class InfectionModel(Model):
         self.datacollector.collect(self)
         self.schedule.step()
 
-
-# In[ ]:
-
-
 def get_column_data(model):
     #pivot the model dataframe to get states count at each step
     agent_state = model.datacollector.get_agent_vars_dataframe()
@@ -63,10 +53,6 @@ def plot_states(model,ax):
     X = get_column_data(model)
     X.plot(ax=ax,lw=3,alpha=0.8)
 
-
-# In[2]:
-
-
 pop=300
 steps=100
 st=time.time()
@@ -76,9 +62,6 @@ for i in range(steps):
 print (time.time()-st)
 agent_state = model.datacollector.get_agent_vars_dataframe()
 print (get_column_data(model))
-
-
-# In[ ]:
 
 
 f,ax=plt.subplots(1,1,figsize=(8,4))
