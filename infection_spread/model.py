@@ -116,10 +116,9 @@ def __init__(self, floor_plan_file, human_count, random_spawn, save_plots, N=10,
                 a.state = State.INFECTED
                 a.recovery_time = self.get_recovery_time()
                     
-self.running = True
-self.datacollector = DataCollector(
-        #model_reporters={"Gini": compute_gini}, 
-agent_reporters={"State": "state"})
+		self.datacollector = DataCollector(
+        	#model_reporters={"Gini": compute_gini}, 
+			agent_reporters={"State": "state"})
 
 def get_recovery_time(self):
     return int(self.random.normalvariate(self.recovery_days,self.recovery_sd))
