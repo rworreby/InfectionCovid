@@ -1,6 +1,7 @@
 import os
 import random
 import numpy as np
+import pandas as pd
 import networkx as nx
 import matplotlib.pyplot as plt
 import time
@@ -15,7 +16,7 @@ from .agent import Human, Wall, Exit, Door
 class InfectionModel(Model):
     """A model for infection spread."""
 
-def __init__(self, floor_plan_file, human_count, random_spawn, save_plots, N=10, width=10, height=10, ptrans=0.5, progression_period=3, progression_sd=2, death_rate=0.0193, recovery_days=21, recovery_sd=7):
+    def __init__(self, human_count, random_spawn, save_plots, floor_plan_file="floorplan_1.txt", N=10, width=10, height=10, ptrans=0.5, progression_period=3, progression_sd=2, death_rate=0.0193, recovery_days=21, recovery_sd=7):
         # Load floorplan
         # floorplan = np.genfromtxt(path.join("infection_spread/floorplans/", floor_plan_file))
         with open(os.path.join("infection_spread/floorplans/", floor_plan_file), "rt") as f:
@@ -116,7 +117,7 @@ def __init__(self, floor_plan_file, human_count, random_spawn, save_plots, N=10,
                 a.state = State.INFECTED
                 a.recovery_time = self.get_recovery_time()
                     
-		self.datacollector = DataCollector(
+        self.datacollector = DataCollector(
         	#model_reporters={"Gini": compute_gini}, 
 			agent_reporters={"State": "state"})
 
@@ -152,7 +153,7 @@ def plot_states(model,ax):
 pop=300
 steps=100
 st=time.time()
-model = InfectionModel(pop, 20, 20, ptrans=0.5)
+model = InfectionModel(pop, 20, False, ptrans=0.5)
 for i in range(steps):
     model.step()
 print (time.time()-st)
