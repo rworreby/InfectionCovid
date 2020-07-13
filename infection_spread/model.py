@@ -92,18 +92,18 @@ def __init__(self, floor_plan_file, human_count, random_spawn, save_plots, N=10,
                     self.graph.add_edge(pos, neighbor)
 
  # Start placing human agents
-        for i in range(0, self.human_count):
-            if self.random_spawn:  # Place human agents randomly
-                pos = self.grid.find_empty()
-            else:  # Place human agents at specified spawn locations
-                pos = random.choice(self.spawn_list)
+       # for i in range(0, self.human_count):
+        #    if self.random_spawn:  # Place human agents randomly
+         #       pos = self.grid.find_empty()
+          #  else:  # Place human agents at specified spawn locations
+           #     pos = random.choice(self.spawn_list)
 
-            if pos:
+            #if pos:
                 # Create a random human
-                health = random.randint(self.MIN_HEALTH * 100, self.MAX_HEALTH * 100) / 100
-                speed = random.randint(self.MIN_SPEED, self.MAX_SPEED)
+             #   health = random.randint(self.MIN_HEALTH * 100, self.MAX_HEALTH * 100) / 100
+              #  speed = random.randint(self.MIN_SPEED, self.MAX_SPEED)
 
-         for i in range(self.num_agents):
+        for i in range(self.num_agents):
             a = Human(i, self)
             self.schedule.add(a)
             # Add the agent to a random grid cell
@@ -119,7 +119,7 @@ def __init__(self, floor_plan_file, human_count, random_spawn, save_plots, N=10,
 self.running = True
 self.datacollector = DataCollector(
         #model_reporters={"Gini": compute_gini}, 
-        agent_reporters={"State": "state"})
+agent_reporters={"State": "state"})
 
 def get_recovery_time(self):
     return int(self.random.normalvariate(self.recovery_days,self.recovery_sd))
