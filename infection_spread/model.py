@@ -124,17 +124,6 @@ class InfectionModel(Model):
 def get_recovery_time(self):
     return int(self.random.normalvariate(self.recovery_days,self.recovery_sd))
 
-def step(self):
-        """
-        Advance the model by one step.
-        """
-        self.schedule.step()
-
-        # If there's no fire yet, attempt to start one
-        if not self.fire_started:
-            self.start_fire()
-
-        self.datacollector.collect(self)
 
 def get_column_data(model):
     #pivot the model dataframe to get states count at each step
