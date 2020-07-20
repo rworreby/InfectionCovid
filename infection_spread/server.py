@@ -56,5 +56,4 @@ model_params = {
 }
 
 # Start the visual server with the model
-server = ModularServer(InfectionModel, [canvas_element, status_chart], "Infection Model",
-                       model_params)
+server = ModularServer(InfectionModel, [canvas_element, status_chart], "Infection Model", model_params)
