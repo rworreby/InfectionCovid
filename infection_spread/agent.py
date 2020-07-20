@@ -17,6 +17,7 @@ class State(enum.IntEnum):
     SUSCEPTIBLE = 0
     INFECTED = 1
     RECOVERED = 2
+    NA = 3
 
 
 class Human(Agent):
@@ -26,6 +27,7 @@ class Human(Agent):
         self.age = self.random.normalvariate(20,40)        
         self.state = State.SUSCEPTIBLE  
         self.infection_time = 0
+        self.model = model
 
     def move(self):
         """Move the agent"""
@@ -58,7 +60,7 @@ class Human(Agent):
             #other = self.random.choice(cellmates)
             for other in cellmates:
                 #print (self.model.schedule.time,self.state,other.state)                
-                if self.random.random() > model.ptrans:
+                if self.random.random() > self.model.ptrans:
                     continue
                 if self.state is State.INFECTED and other.state is State.SUSCEPTIBLE:                    
                     other.state = State.INFECTED
@@ -79,6 +81,7 @@ class FloorObject(Agent):
         super().__init__(pos, model)
         self.pos = pos
         self.traversable = traversable
+        self.state = State.NA
 
     def get_position(self):
         return self.pos
@@ -86,11 +89,14 @@ class FloorObject(Agent):
 class Door(FloorObject):
     def __init__(self, pos, model):
         super().__init__(pos, traversable=True, model=model)
+        self.state = State.NA
 
 class Exit(FloorObject):
     def __init__(self, pos, model):
         super().__init__(pos, traversable=True, model=model)
+        self.state = State.NA
 
 class Wall(FloorObject):
     def __init__(self, pos, model):
         super().__init__(pos, traversable=False, model=model)
+        self.state = State.NA

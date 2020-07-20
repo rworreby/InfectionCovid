@@ -3,7 +3,7 @@ from mesa.visualization.modules import CanvasGrid, ChartModule
 from mesa.visualization.ModularVisualization import ModularServer
 from mesa.visualization.UserParam import UserSettableParameter
 from .model import InfectionModel
-from .agent import Exit, Wall, Human, Door
+from .agent import Exit, State, Wall, Human, Door
 
 # Creates a visual portrayal of the model in the browser interface
 def infection_spread_portrayal(agent):
@@ -56,5 +56,5 @@ model_params = {
 }
 
 # Start the visual server with the model
-server = ModularServer(InfectionModel, [canvas_element, status_chart, mobility_chart, collaboration_chart], "Infection Model",
+server = ModularServer(InfectionModel, [canvas_element, status_chart], "Infection Model",
                        model_params)

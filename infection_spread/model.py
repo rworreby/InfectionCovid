@@ -11,7 +11,7 @@ from mesa.datacollection import DataCollector
 from mesa.space import MultiGrid
 from mesa.time import RandomActivation
 
-from .agent import Human, Wall, Exit, Door
+from .agent import Human, State, Wall, Exit, Door
  
 class InfectionModel(Model):
     """A model for infection spread."""
@@ -121,12 +121,19 @@ class InfectionModel(Model):
         	#model_reporters={"Gini": compute_gini}, 
 			agent_reporters={"State": "state"})
 
-def get_recovery_time(self):
-    return int(self.random.normalvariate(self.recovery_days,self.recovery_sd))
+    def get_recovery_time(self):
+        return int(self.random.normalvariate(self.recovery_days,self.recovery_sd))
+
+    def step(self):
+        """
+        Advance the model by one step.
+        """
+        self.schedule.step()
+        self.datacollector.collect(self)
 
 
 def get_column_data(model):
-    #pivot the model dataframe to get states count at each step
+        #pivot the model dataframe to get states count at each step
     agent_state = model.datacollector.get_agent_vars_dataframe()
     X = pd.pivot_table(agent_state.reset_index(),index='Step',columns='State',aggfunc=np.size,fill_value=0)    
     labels = ['Susceptible','Infected','Recovered']
