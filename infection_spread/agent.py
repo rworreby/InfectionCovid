@@ -29,6 +29,7 @@ class Human(Agent):
         self.infection_time = 0
         self.model = model
 
+
     def move(self):
         """Move the agent"""
 
