@@ -25,12 +25,12 @@ def infection_spread_portrayal(agent):
         portrayal["Layer"] = 1
 
     elif type(agent) is Door:
-        portrayal["Shape"] = "infection_sprea/resources/door.png"
+        portrayal["Shape"] = "infection_spread/resources/door.png"
         portrayal["scale"] = 1
         portrayal["Layer"] = 1
 
     elif type(agent) is Wall:
-        portrayal["Shape"] = "infection_sprea/resources/wall.png"
+        portrayal["Shape"] = "infection_spread/resources/wall.png"
         portrayal["scale"] = 1
         portrayal["Layer"] = 1
 
