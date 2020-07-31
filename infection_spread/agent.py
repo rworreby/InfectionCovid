@@ -28,7 +28,6 @@ class Human(Agent):
         self.state = State.SUSCEPTIBLE  
         self.infection_time = 0
         self.model = model
-
     def get_position(self):
         return self.pos
 

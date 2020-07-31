@@ -16,7 +16,10 @@ from .agent import Human, State, Wall, Exit, Door
 class InfectionModel(Model):
     """A model for infection spread."""
 
-    def __init__(self, human_count, random_spawn, save_plots, floor_plan_file="floorplan_1.txt", N=10, width=10, height=10, ptrans=0.5, progression_period=3, progression_sd=2, death_rate=0.0193, recovery_days=21, recovery_sd=7):
+    def __init__(self, human_count, random_spawn, save_plots, 
+            floor_plan_file="floorplan_1.txt", N=10, width=10, height=10, ptrans=0.5, 
+            progression_period=3, progression_sd=2, death_rate=0.0193, recovery_days=21, 
+            recovery_sd=7):
         # Load floorplan
         # floorplan = np.genfromtxt(path.join("infection_spread/floorplans/", floor_plan_file))
         with open(os.path.join("infection_spread/floorplans/", floor_plan_file), "rt") as f:
@@ -105,7 +108,7 @@ class InfectionModel(Model):
               #  speed = random.randint(self.MIN_SPEED, self.MAX_SPEED)
 
         for i in range(self.num_agents):
-            a = Human(i, self)
+            a = Human(unique_id=i, model=self)
             self.schedule.add(a)
             # Add the agent to a random grid cell
             x = self.random.randrange(self.grid.width)
@@ -152,9 +155,9 @@ st=time.time()
 model = InfectionModel(pop, 20, False, ptrans=0.5)
 for i in range(steps):
     model.step()
-print (time.time()-st)
+print(time.time()-st)
 agent_state = model.datacollector.get_agent_vars_dataframe()
-print (get_column_data(model))
+print(get_column_data(model))
 
 f,ax=plt.subplots(1,1,figsize=(8,4))
 plot_states(model,ax)
