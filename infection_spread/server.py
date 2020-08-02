@@ -3,7 +3,8 @@ from mesa.visualization.modules import CanvasGrid, ChartModule
 from mesa.visualization.ModularVisualization import ModularServer
 from mesa.visualization.UserParam import UserSettableParameter
 from .model import InfectionModel
-from .agent import Exit, State, Wall, Human, Door
+from .agent import Exit, Wall, Human, Door
+
 
 # Creates a visual portrayal of the model in the browser interface
 def infection_spread_portrayal(agent):
@@ -37,6 +38,7 @@ def infection_spread_portrayal(agent):
 
     return portrayal
 
+
 # the grid size is fixed to 50x50
 canvas_element = CanvasGrid(infection_spread_portrayal, 50, 50, 800, 800)
 
@@ -46,16 +48,31 @@ status_chart = ChartModule([{"Label": "Susceptible", "Color": "blue"},
                             {"Label": "Recovered", "Color": "green"}])
 
 # Get list of available floorplans
-floor_plans = [f for f in listdir("infection_spread/floorplans") if path.isfile(path.join("infection_spread/floorplans", f))]
+floor_plans = [f for f in listdir("infection_spread/floorplans")
+               if path.isfile(path.join("infection_spread/floorplans", f))]
 
 # Specify the parameters changeable by the user, in the web interface
 model_params = {
-    "floor_plan_file": UserSettableParameter("choice", "Floorplan", value=floor_plans[0], choices=floor_plans),
-    "human_count": UserSettableParameter("number", "Number Of Human Agents", value=10),
-    "random_spawn": UserSettableParameter('checkbox', 'Spawn Agents at Random Locations', value=True),
-    "save_plots": UserSettableParameter('checkbox', 'Save plots to file', value=True)
+    "floor_plan_file": UserSettableParameter("choice", "Floorplan",
+                                             value=floor_plans[0],
+                                             choices=floor_plans
+                                             ),
+    "human_count": UserSettableParameter("number",
+                                         "Number Of Human Agents",
+                                         value=10
+                                         ),
+    "random_spawn": UserSettableParameter('checkbox',
+                                          'Spawn Agents at Random Locations',
+                                          value=True
+                                          ),
+    "save_plots": UserSettableParameter('checkbox',
+                                        'Save plots to file',
+                                        value=True)
 }
 
 # Start the visual server with the model
-server = ModularServer(InfectionModel, [canvas_element, status_chart], "Infection Model",
-                       model_params)
+server = ModularServer(InfectionModel,
+                       [canvas_element, status_chart],
+                       "Infection Model",
+                       model_params
+                       )
